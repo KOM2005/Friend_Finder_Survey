@@ -1,61 +1,61 @@
-let newUser = {};
-let bestFriend = {
-	diff: 100,
+let newQuest = {};
+let bestMatch = {
+	diff: 500,
 	name: "",
 	image: ""
 };
 
 
-$('#submit').on('click', () => {
-	let userName = $('#name').val().trim();
+$('#submit').on('click', function() {
+	let userQuest = $('#name').val().trim();
 	let imag = $('#image').val().trim();
-	let ans1 = $('#quest1').val().trim();
-	let ans2 = $('#quest2').val().trim();
-	let ans3 = $('#quest3').val().trim();
-	let ans4 = $('#quest4').val().trim();
-	let ans5 = $('#quest5').val().trim();
-	let ans6 = $('#quest6').val().trim();
-	let ans7 = $('#quest7').val().trim();
-	let ans8 = $('#quest8').val().trim();
-	let ans9 = $('#quest9').val().trim();
-	let ans10 = $('#quest10').val().trim();
+	let resp1 = $('#qust1').val().trim();
+	let resp2 = $('#qust2').val().trim();
+	let resp3 = $('#qust3').val().trim();
+	let resp4 = $('#qust4').val().trim();
+	let resp5 = $('#qust5').val().trim();
+	let resp6 = $('#qust6').val().trim();
+	let resp7 = $('#qust7').val().trim();
+	let resp8 = $('#qust8').val().trim();
+	let resp9 = $('#qust9').val().trim();
+	let resp10 = $('#qust10').val().trim();
 
-	if (userName === "" || imag === "" || ans1 === "" || ans2 === "" || ans3 === "" || ans4 === "" || ans5 === "" || ans6 === "" || ans7 === "" || ans8 === "" || ans9 === "" || ans10 === "") {
+	if (userQuest === "" || imag === "" || resp1 === "" || resp2 === "" || resp3 === "" || resp4 === "" || resp5 === "" || resp6 === "" || resp7 === "" || resp8 === "" || resp9 === "" || resp10 === "") {
 		alert("Missing Data, Fill in");	
 	} else {
-		newUser = {
-			name: userName,
-			photo: imag,
-			scores: [ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10]
+		newQuest = {
+			name: userQuest,
+			picture: imag,
+			scores: [resp1, resp2, resp3, resp4, resp5, resp6, resp7, resp8, resp9, resp10]
 		};
 
-		findFriend(newUser.scores);
+		findMatch(newQuest.scores);
 
-		setTimeout(postData, 1500);
+		setTimeout(postData, 1000);
 
 		function postData() {
-			$.post({url: '/api/friends', contentType: 'application/json'}, JSON.stringify(newUser));
+			$.post({url: '/api/friends', contentType: 'application/json'}, JSON.stringify(newQuest));
 		}
 
 		$('#name').val("");
 		$('#image').val("");
-		$('#quest1').val("");
-		$('#quest2').val("");
-		$('#quest3').val("");
-		$('#quest4').val("");
-		$('#quest5').val("");
-		$('#quest6').val("");
-		$('#quest7').val("");
-		$('#quest8').val("");
-		$('#quest9').val("");
-		$('#quest10').val("");
+		$('#qust1').val("");
+		$('#qust2').val("");
+		$('#qust3').val("");
+		$('#qust4').val("");
+		$('#qust5').val("");
+		$('#qust6').val("");
+		$('#qust7').val("");
+		$('#qust8').val("");
+		$('#qust9').val("");
+		$('#qust10').val("");
 	}
 });
 
 
-function findFriend(scores) {
+function findMatch(scores) {
 
-	$.get('/api/friends', (friends) => {
+	$.get('/api/friends', function(friends) {
 
 		let count = 0;
 		let arrayLength = friends.length;
@@ -66,8 +66,8 @@ function findFriend(scores) {
 		}		
 
 		if (count === arrayLength) {
-			$('#friendName').text(bestFriend.name);
-			$('#friendImg').attr('src', bestFriend.image);
+			$('#friendName').text(bestMatch.name);
+			$('#friendImg').attr('src', bestMatch.image);
 			$('#myModal').modal('toggle');
 		}
 	});	
@@ -85,10 +85,10 @@ function calcScoreDiff(user, friend) {
 	}
 
 	if (count === 10) {
-		if (diff < bestFriend.diff) {
-			bestFriend.diff = diff;
-			bestFriend.name = friend.name;
-			bestFriend.image = friend.photo;
+		if (diff < bestMatch.diff) {
+			bestMatch.diff = diff;
+			bestMatch.name = friend.name;
+			bestMatch.image = friend.picture;
 		} else {
 			return;
 		}

@@ -1,18 +1,18 @@
+var path = require('path');
+module.exports = function(app) {
 
-module.exports = (app) => {
-
-	app.get('/', (req, res) => {
+	app.get('/', function(req, res) {
 		// res.sendFile(path.join(__dirname, 'home.html'));
-		res.sendFile('home.html', { root: './app/public' });
+		res.sendFile(path.join(__dirname + '/../public/home.html'));
 	});
 
-	app.get('/survey', (req,res) => {
-		// res.sendFile(path.join(__dirname, 'survey.html'));
-		res.sendFile('survey.html', { root: './app/public' });
+	app.get('/survey', function(req,res) {
+		res.sendFile(path.join(__dirname + '/../public/survey.html'));
+		// res.sendFile('survey.html', { root: './app/public' });
 	})
 
-	app.get('/logic.js', (req,res) => {
-		// res.sendFile(path.join(__dirname, 'survey.html'));
+	app.get('/logic.js', function(req,res) {
+
 		res.sendFile('logic.js', { root: './' });
 	})
 };
