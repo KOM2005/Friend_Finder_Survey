@@ -2,7 +2,7 @@
   "name": "friend_finder_survey",
   "version": "1.0.0",
   "description": "",
-  "main": "logic.js",
+  "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
